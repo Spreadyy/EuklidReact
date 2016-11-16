@@ -1,0 +1,22 @@
+body {
+	overflow-y: scroll;
+}
+
+.App {
+	text-align: center;
+}
+
+.App-header {
+	background-color: #222;
+	padding: 20px;
+	color: white;
+}
+
+.App-intro {
+	font-size: large;
+}
+
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+}
