@@ -6,6 +6,7 @@ class NumberInput extends React.Component {
 	}
 
 	render() {
+		const name = this.props.name;
 		const value = this.props.value;
 		const readonly = this.props.readonly;
 
@@ -13,7 +14,7 @@ class NumberInput extends React.Component {
 			<input value={value} type="number" readOnly="readonly" /> :
 			<input value={value} type="number" onChange={this.handleChange} />;
 		return (
-			<div>{input}</div>);
+			<div className={name}>{input}</div>);
 	}
 }
 

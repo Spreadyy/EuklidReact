@@ -76,17 +76,21 @@ class App extends Component {
 		let y = this.state.y;
 
 		if (y >= x) {
-			messages.push(<div className="message">x should be bigger than y.</div>)
+			messages.push(<p className="message">x should be bigger than y.</p>)
 		}
 
 		let initRow = this.getInitialRow(x, y);
 
 		let actualRow = initRow;
 
-		while (actualRow.y !== 1 && actualRow.y !== 0) {
+		while (actualRow.r !== 0) {
 			actualRow = this.calcNextRow(actualRow.y, actualRow.r, actualRow);
 			additionalRows.push(actualRow);
 		}
+
+		messages.push(
+			<p className="message">({actualRow.s} × {initRow.x}) + ({actualRow.t} × {initRow.y}) = {actualRow.y} (ggT)</p>
+		);
 
 		rowNodes.push(
 			<EuklidRow
@@ -112,11 +116,23 @@ class App extends Component {
 				<div className="App-header">
 					<h2>Euklidischer Algorithmus</h2>
 				</div>
-				<p className="App-intro">
-					To get started, edit the two numbers below:
-        		</p>
 				<div className="container">
-					{rowNodes}
+					<p className="App-intro">
+						To get started, edit the two numbers (x &amp; y) below:
+        			</p>
+					<div className="rows">
+						<div className="rowHeader">
+							<div>x</div>
+							<div>y</div>
+							<div>q</div>
+							<div>r</div>
+							<div>u</div>
+							<div>s</div>
+							<div>v</div>
+							<div>t</div>
+						</div>
+						{rowNodes}
+					</div>
 					{messages}
 				</div>
 			</div>

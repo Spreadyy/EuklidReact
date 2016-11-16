@@ -2,14 +2,11 @@ body {
 	overflow-y: scroll;
 }
 
-.App {
-	text-align: center;
-}
-
 .App-header {
 	background-color: #222;
 	padding: 20px;
 	color: white;
+	text-align: center;
 }
 
 .App-intro {
@@ -19,4 +16,32 @@ body {
 .container {
 	max-width: 500px;
 	margin: 0 auto;
+}
+
+.rows {
+	box-shadow: 1px 1px 5px #222;
+	margin-bottom: 40px;
+}
+
+.rowHeader {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.rowHeader > * {
+	flex: 1 1 10%;
+	width: 10%;
+	display: inline-block;
+	padding: 5px;
+	text-align: center;
+}
+
+.message {
+	font-size: large;
+	float: left;
+	width: 100%;
+	box-shadow: 1px 1px 5px #2a27ea;
+	box-sizing: border-box;
+	padding: 10px;
 }
