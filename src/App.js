@@ -47,14 +47,14 @@ class App extends Component {
 
 		return ({
 			first: false,
-			x: x,
-			y: y,
-			q: q,
-			r: r,
-			u: u,
-			s: s,
-			v: v,
-			t: t
+			x,
+			y,
+			q,
+			r,
+			u,
+			s,
+			v,
+			t
 		});
 	}
 
@@ -72,8 +72,7 @@ class App extends Component {
 		let rowNodes = [];
 		let messages = [];
 
-		let x = this.state.x;
-		let y = this.state.y;
+		const { x, y } = this.state;
 
 		if (y >= x) {
 			messages.push(<p className="message">x should be bigger than y.</p>)
@@ -93,9 +92,8 @@ class App extends Component {
 		);
 
 		rowNodes.push(
-			<EuklidRow
-				x={initRow.x} y={initRow.y} q={initRow.q} r={initRow.r}
-				u={initRow.u} s={initRow.s} v={initRow.v} t={initRow.t}
+			<EuklidRow 
+				{...initRow}
 				onChangeX={this.handleChangeX}
 				onChangeY={this.handleChangeY}
 				first></EuklidRow>
@@ -104,10 +102,7 @@ class App extends Component {
 		for (var i = 0; i < additionalRows.length; i++) {
 			var row = additionalRows[i];
 			rowNodes.push(
-				<EuklidRow
-					x={row.x} y={row.y} q={row.q} r={row.r}
-					u={row.u} s={row.s} v={row.v} t={row.t}
-					></EuklidRow>
+				<EuklidRow {...row}/>
 			);
 		}
 
