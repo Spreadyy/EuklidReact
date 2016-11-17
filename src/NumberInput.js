@@ -3,10 +3,14 @@ import React from 'react';
 class NumberInput extends React.Component {
 	handleChange = (e) => {
 		const {value} = e.target;
-		const numberValue = parseInt(value, 10);
+		let numberValue = parseInt(value, 10);
 		
 		if (isNaN(numberValue))
 			return;
+		
+		const max = Math.pow(2,32) - 1;
+		if (numberValue > max)
+			numberValue = max;
 
 		this.props.onChange(numberValue);
 
