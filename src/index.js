@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
+import CalcMaxRows from './CalcMaxRows';
 import App from './App';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+
+  <Router history={browserHistory}>
+    <Route path="/" component={App}></Route>
+    <Route path="/CalcMaxRows" component={CalcMaxRows} />
+  </Router>,
   document.getElementById('root')
 );

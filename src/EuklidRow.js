@@ -16,23 +16,23 @@ class EuklidRow extends React.Component {
 
 		if (this.props.first) {
 			numberInputs.push(
-				<NumberInput name="x" value={this.props.x} onChange={this.handleChangeX}></NumberInput>,
-				<NumberInput name="y" value={this.props.y} onChange={this.handleChangeY}></NumberInput>
+				<NumberInput key="x" name="x" value={this.props.x} onChange={this.handleChangeX}></NumberInput>,
+				<NumberInput key="y" name="y" value={this.props.y} onChange={this.handleChangeY}></NumberInput>
 			);
 		} else {
 			numberInputs.push(
-				<NumberInput name="x" value={this.props.x} readonly></NumberInput>,
-				<NumberInput name="y" value={this.props.y} readonly></NumberInput>
+				<NumberInput key="x" name="x" value={this.props.x} readonly></NumberInput>,
+				<NumberInput key="y" name="y" value={this.props.y} readonly></NumberInput>
 			);
 		}
 
 		numberInputs.push(
-			<NumberInput name="q" value={this.props.q} readonly></NumberInput>,
-			<NumberInput name="r" value={this.props.r} readonly></NumberInput>,
-			<NumberInput name="u" value={this.props.u} readonly></NumberInput>,
-			<NumberInput name="s" value={this.props.s} readonly></NumberInput>,
-			<NumberInput name="v" value={this.props.v} readonly></NumberInput>,
-			<NumberInput name="t" value={this.props.t} readonly></NumberInput>
+			<NumberInput key="q" name="q" value={this.props.q} readonly></NumberInput>,
+			<NumberInput key="r" name="r" value={this.props.r} readonly></NumberInput>,
+			<NumberInput key="u" name="u" value={this.props.u} readonly></NumberInput>,
+			<NumberInput key="s" name="s" value={this.props.s} readonly></NumberInput>,
+			<NumberInput key="v" name="v" value={this.props.v} readonly></NumberInput>,
+			<NumberInput key="t" name="t" value={this.props.t} readonly></NumberInput>
 		);
 
 		return (

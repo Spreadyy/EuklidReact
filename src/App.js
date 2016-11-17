@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import { Link } from 'react-router';
+import { getRows } from './EuklidCalc';
 import EuklidRow from './EuklidRow';
 
 class App extends Component {
@@ -21,95 +22,56 @@ class App extends Component {
 		});
 	}
 
-	getInitialRow = (x, y) => {
-		return ({
-			first: true,
-			x: x,
-			y: y,
-			q: this.calcQ(x, y),
-			r: this.calcR(x, y),
-			u: 1,
-			s: 0,
-			v: 0,
-			t: 1
-		});
-	}
-
-	calcNextRow = (x, y, lastRow) => {
-		let q = this.calcQ(x, y);
-		let r = this.calcR(x, y);
-		let u, s, v, t;
-
-		u = lastRow.s;
-		s = lastRow.u - (lastRow.q * lastRow.s);
-		v = lastRow.t;
-		t = lastRow.v - (lastRow.q * lastRow.t);
-
-		return ({
-			first: false,
-			x,
-			y,
-			q,
-			r,
-			u,
-			s,
-			v,
-			t
-		});
-	}
-
-	calcQ = (x, y) => {
-		return parseInt(x / y, 10);
-	}
-
-	calcR = (x, y) => {
-		return x % y;
-	}
-
 	render() {
-		let additionalRows = [];
-
 		let rowNodes = [];
 		let messages = [];
 
 		const { x, y } = this.state;
 
 		if (y >= x) {
-			messages.push(<p className="message">x should be bigger than y.</p>)
+			messages.push('x should be bigger than y');
 		}
 
-		let initRow = this.getInitialRow(x, y);
+		const rows = getRows(x, y);
 
-		let actualRow = initRow;
+		const [initRow, ...additionalRows] = rows;
+		const lastRow = rows[rows.length - 1];
 
-		while (actualRow.r !== 0) {
-			actualRow = this.calcNextRow(actualRow.y, actualRow.r, actualRow);
-			additionalRows.push(actualRow);
-		}
-
-		messages.push(
-			<p className="message">({actualRow.s} × {initRow.x}) + ({actualRow.t} × {initRow.y}) = {actualRow.y} (ggT)</p>
-		);
+		messages.push(`(${lastRow.s} × ${initRow.x}) + (${lastRow.t} × ${initRow.y}) = ${lastRow.y} (ggT)`);
 
 		rowNodes.push(
-			<EuklidRow 
+			<EuklidRow
+				key="row0"
 				{...initRow}
 				onChangeX={this.handleChangeX}
 				onChangeY={this.handleChangeY}
 				first></EuklidRow>
 		);
 
-		for (var i = 0; i < additionalRows.length; i++) {
-			var row = additionalRows[i];
+		for (let i = 0; i < additionalRows.length; i++) {
+			let row = additionalRows[i];
+			let key = 'row' + (i + 1);
 			rowNodes.push(
-				<EuklidRow {...row}/>
+				<EuklidRow
+					key={key}
+					{...row} />
+			);
+		}
+
+		let messageNodes = [];
+		for (let i = 0; i < messages.length; i++) {
+			messageNodes.push(
+				<p key={i} className="message">{messages[i]}</p>
 			);
 		}
 
 		return (
 			<div className="App">
 				<div className="App-header">
-					<h2>Euklidischer Algorithmus</h2>
+					<h2>
+						Euklidischer Algorithmus
+						<Link className="calcMaxRows" to="/CalcMaxRows">🏆</Link>
+					</h2>
 				</div>
 				<div className="container">
 					<p className="App-intro">
@@ -128,7 +90,7 @@ class App extends Component {
 						</div>
 						{rowNodes}
 					</div>
-					{messages}
+					{messageNodes}
 				</div>
 			</div>
 		);
