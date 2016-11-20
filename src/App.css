@@ -60,3 +60,7 @@ body {
 	border-radius: 100px;
 	margin-top: -8px;
 }
+
+.chart {
+	width: 100%
+}

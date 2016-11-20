@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
+import Chart from './Chart';
 import { getRows } from './EuklidCalc';
 import { Link } from 'react-router';
 
 class CalcMaxRows extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { max: 1 };
+		this.state = {
+			max: 1
+		};
 	}
 
 	handleChange = (e) => {
@@ -23,15 +26,17 @@ class CalcMaxRows extends React.Component {
 
 	run = () => {
 		const max = this.state.max;
+
 		let data = [];
-		for (let y = 1; y <= max; y++) {
-			for (var x = (y+1); x <= max; x++) {
-				let rows = getRows(x, y);
-				data.push(rows.length);
+		for (let x = 1; x <= max; x++) {
+			let xRow = [];
+			for (var y = 1; y <= max; y++) {
+				let rows = getRows(y, x);
+				xRow.push(rows.length);
 			}
+			data.push(xRow);
 		}
 		this.setState({ data: data });
-		console.log(data)
 	}
 
 	render() {
@@ -43,11 +48,13 @@ class CalcMaxRows extends React.Component {
 					</h2>
 				</div>
 				<div className="container">
-					<input type="number" min="1" value={this.state.max} onChange={this.handleChange} />
-					<button type="button" onClick={this.run}>Start</button>
-					<div className="data">
-						{this.state.data}
-					</div>
+					<form>
+						<input type="number" min="1" value={this.state.max} onChange={this.handleChange} />
+						<button type="button" onClick={this.run}>Start</button>
+					</form>
+				</div>
+				<div className="chart">
+					<Chart data={this.state.data}></Chart>
 				</div>
 			</div>
 		);
